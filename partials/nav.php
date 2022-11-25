@@ -10,6 +10,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-broom"></i></div>
                                 Registrar actividad
                             </a> 
+                            <a class="nav-link" href="./registrar_usuario.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-broom"></i></div>
+                                Registrar Usuario
+                            </a>
                             <a class="nav-link" href="./charts.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Graficos de actividades
