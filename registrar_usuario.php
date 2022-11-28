@@ -1,3 +1,14 @@
+<?php
+    require('database.php');
+    require 'partials/roles.php';
+
+    if(isset($_SESSION['user_id']) && $id_rol == 3){
+
+    }else{
+        header('Location: 404.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,7 +31,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Registrar Actividad</h1>
+                        <h1 class="mt-4">Registrar Usuario</h1>
                        <!-- <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
                             <li class="breadcrumb-item active">Registrar Actividad</li>
@@ -65,7 +76,7 @@
                         </div> -->
                         <div class="row">
                             <div class="col-md-4">
-                                <?php if(isset($_SESSION['message']) && $_SESSION['message'] != '') {
+                            <?php if(isset($_SESSION['message']) && $_SESSION['message'] != '') {
                                  $message = $_SESSION['message'];
                                   $_SESSION['message'] = '';
                                 ?>
@@ -75,15 +86,37 @@
                                </div>
                                 <?php }  ?>
                                 <div class="card card-body bg-success p-2 bg-opacity-50" >
-                                    <form action="guardar_actividad.php" method="POST">
+                                    <form action="guardar_usuario.php" method="POST">
                                         <div class="form-group mt-2">
-                                            <input type="text" name="nombre_a" class="form-control" placeholder="Ingrese el nombre de la actividad" autofocus>
+                                            <input type="text" required name="nombre" class="form-control" placeholder="Ingrese el nombre de usuario" autofocus>
                                         </div>
                                         <div class="form-group mt-2">
-                                            <textarea name="descripcion_a" rows="2" class="form-control" placeholder="Ingrese la descripcion de la actividad"></textarea>
+                                            <input type="text" required name="apellido" class="form-control" placeholder="Ingrese el apellido">
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <input type="emai" required name="email" value="" class="form-control" placeholder="Ingrese el email">
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <input type="text" required name="edad" class="form-control" placeholder="Ingrese la edad">
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <select name="id_ciudad" required class="form-select" aria-label="Default select example">
+                                            <option value="">Seleccione la ciudad</option>
+                                            <?php
+                                                $records = $conn->prepare('SELECT * FROM ciudades');
+                                                $records->execute();
+                                                $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
+
+                                                foreach($resultado as $row){ ?>
+                                                <option value="<?php echo $row['id_ciudad'] ?>"><?php echo $row['nombre'] ?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" required name="password" class="form-control" placeholder="Ingrese la contraseña">
                                         </div>
                                         <div class="d-grid gap-2">
-                                             <button class="btn btn-success mt-2" name="guardar_tarea">Guardar Tarea</button>
+                                             <button class="btn btn-success mt-2" require name="guardar_Usuario">Guardar Usuario</button>
                                         </div>
                                     </form>
                                 </div>
@@ -93,29 +126,34 @@
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Descripcion</th>
-                                            <th>Fecha de Creacion</th>
+                                            <th>Apellido</th>
+                                            <th>Email</th>
+                                            <th>Edad</th>
+                                            <th>Ciudad</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
+                                        <?php
                                             $usuario = $_SESSION['user_id'];
-                                            $records = $conn->prepare('SELECT nombre, descripcion, id_tarea, creado_en FROM tareas WHERE id_usuario=:usuario ');
-                                            $records->bindParam(':usuario', $usuario);
+                                            $records = $conn->prepare('SELECT id_usuario, usuarios.nombre, ciudades.nombre as nombre_ciudad, apellido, email, edad, usuarios.id_ciudad FROM usuarios LEFT JOIN ciudades ON usuarios.id_ciudad=ciudades.id_ciudad');
+                                            //$records->bindParam(':usuario', $usuario);
                                             $records->execute();
                                             $results = $records->fetchAll(PDO::FETCH_ASSOC);
-
+                                            
                                             foreach($results as $row){ ?>
                                                 <tr>
                                                     <td><?php echo $row['nombre'] ?></td>
-                                                    <td><?php echo $row['descripcion'] ?></td>
-                                                    <td><?php echo $row['creado_en'] ?></td>
+                                                    <td><?php echo $row['apellido'] ?></td>
+                                                    <td><?php echo $row['email'] ?></td>
+                                                    <td><?php echo $row['edad'] ?></td>
+                                                    <td><?php echo $row['nombre_ciudad'] ?></td>
                                                     <td>
-                                                        <a href="editar.php?id=<?php echo $row['id_tarea'] ?>">Editar<i class="fa-address-card-o"></i></a>
-                                                        <a href="eliminar.php?id=<?php echo $row['id_tarea'] ?>">Eliminar</a>
+                                                        <a href="editar_usuario.php?id=<?php echo $row['id_usuario'] ?>">Editar<i class="fa-address-card-o"></i></a>
+                                                        <a href="eliminar_usuario.php?id=<?php echo $row['id_usuario'] ?>">Eliminar</a>
                                                     </td>
                                                 </tr>
+
                                           <?php  } ?>
                                     </tbody>
                                 </table>
