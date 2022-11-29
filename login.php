@@ -5,8 +5,6 @@
 		header('Location: ../prueba-one');
 	}
 
-	
-
 	if(!empty($_POST['email']) && !empty($_POST['password'])){
 		$records= $conn->prepare('SELECT id_usuario, nombre, apellido, email, edad, password FROM usuarios WHERE email=:email');
 		$records->bindParam(':email', $_POST['email']);
@@ -15,12 +13,21 @@
 
 		$message='';
 
-		if(count($results) >0 && password_verify($_POST['password'], $results['password'])){
+		if(is_countable($results) && count($results) > 0  && password_verify($_POST['password'], $results['password'])){
 			$_SESSION['user_id'] = $results['id_usuario'];
 			header('Location: ../prueba-one');
+		}else if(is_countable($results) && count($results) > 0 && !password_verify($_POST['password'], $results['password'])) {
+			$message='Clave incorrecta';
+			
 		}else{
-			$message='Lo sentimos, los datos son incorrectos';
+			$message='Datos incorrectos';
 		}
+
+		$_SESSION['message']=$message;
+		$_SESSION['message_type']='danger';
+		//header('Location: login.php');
+		
+
 	}
 ?>
 
@@ -59,11 +66,15 @@
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
 
-			 <?php if(!empty($message)): ?>
-				<div class="alert alert-danger">
-						<strong><?= $message ?></strong>
-				</div>
-			<?php endif; ?>
+			<?php if(isset($_SESSION['message']) && $_SESSION['message'] != '') {
+                $message = $_SESSION['message'];
+            	 $_SESSION['message'] = '';
+                ?>
+                <div class="alert alert-<?php echo $_SESSION['message_type']?> alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <?= $message ?>
+                </div>
+                <?php }  ?>
 
 				<form action="login.php" method="post" class="login100-form validate-form">
 					<span class="login100-form-logo">

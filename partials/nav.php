@@ -1,12 +1,9 @@
-<?php 
+<?php
 
-
-echo $_SESSION['user_id']; 
-
+echo $_SESSION['user_id'];
 
 
 ?>
-
 
 <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -15,18 +12,18 @@ echo $_SESSION['user_id'];
                             <a class="nav-link" href="./index.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-biohazard"></i></div>
                                 Inicio
-                            </a>  
+                            </a>
                             <a class="nav-link" href="./registrar_actividad.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-broom"></i></div>
                                 Registrar actividad
-                            </a> 
+                            </a>
                            
-                            <?php 
+                            <?php
                                 require 'roles.php';
                                 if($id_rol == 3) { ?>
                             <a class="nav-link" href="./registrar_usuario.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-broom"></i></div>
-                                Registrar Usuario 
+                                Registrar Usuario
                             </a>
                                <?php } ?>
                             <a class="nav-link" href="./charts.php">
@@ -44,7 +41,7 @@ echo $_SESSION['user_id'];
                             <a class="nav-link" href="./logout.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Salir
-                            </a>  
+                            </a>
                         </div>
                     </div>
                 </nav>

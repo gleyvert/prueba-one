@@ -1,3 +1,14 @@
+<?php
+ require('database.php');
+ require 'partials/roles.php';
+
+ if(isset($_SESSION['user_id']) && $id_rol == 1 OR $id_rol == 3){
+
+ }else{
+     header('Location: 404.php');
+ }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>

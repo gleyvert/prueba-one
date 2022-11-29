@@ -8,7 +8,7 @@ $message= '';
 	
 
 if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['id_ciudad'])){
-	$sql = "INSERT INTO usuarios (nombre,apellido,email,edad,password,id_ciudad) VALUES (:nombre, :apellido, :email, :edad,:password,:ciudad)";
+	$sql = "INSERT INTO usuarios (nombre,apellido,email,edad,password,id_ciudad, id_rol) VALUES (:nombre, :apellido, :email, :edad,:password,:ciudad,:rol)";
 	$stmt=$conn->prepare($sql);
 	$stmt->bindParam(':nombre', $_POST['nombre']);
 	$stmt->bindParam(':apellido', $_POST['apellido']);
@@ -16,6 +16,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['id_ci
 	$stmt->bindParam(':edad', $_POST['edad']);
 	$password= password_hash($_POST['password'], PASSWORD_BCRYPT);
     $stmt->bindParam(':ciudad' , $_POST['id_ciudad']);
+    $stmt->bindParam(':rol', $_POST['id_rol']);
 	$stmt->bindParam(':password' , $password);
     
 	$email = $_POST['email'];

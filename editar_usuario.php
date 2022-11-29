@@ -18,6 +18,7 @@
             $email = $usuario['email'];
             $edad = $usuario['edad'];
             $ciudad = $usuario['id_ciudad'];
+            $rol=$usuario['id_rol'];
         }
        
         if(isset($_POST['actualizar'])){
@@ -27,9 +28,10 @@
             $email_post = $_POST['email'];
             $edad_post = $_POST['edad'];
             $ciudad_post = $_POST['id_ciudad'];
+            $rol_post = $_POST['id_rol'];
             $password_post = $_POST['password'];
 
-            $sql = "UPDATE usuarios SET nombre=:nombre, apellido=:apellido, email=:email, edad=:edad, password=:clave, id_ciudad=:ciudad WHERE id_usuario=:id";
+            $sql = "UPDATE usuarios SET nombre=:nombre, apellido=:apellido, email=:email, edad=:edad, password=:clave, id_ciudad=:ciudad, id_rol=:rol WHERE id_usuario=:id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':nombre', $nombre_post);
@@ -37,6 +39,7 @@
             $stmt->bindParam(':email', $email_post);
             $stmt->bindParam(':edad', $edad_post);
             $stmt->bindParam(':ciudad', $ciudad_post);
+            $stmt->bindParam(':rol', $rol_post);
             $password = password_hash($password_post, PASSWORD_BCRYPT);
             $stmt->bindParam(':clave', $password);
             
@@ -106,6 +109,19 @@
                                         </div>
                                         <div class="form-group mt-2">
                                             <input type="text" required name="edad" class="form-control" value="<?php echo $edad ?>" placeholder="Ingrese la edad">
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <select name="id_rol" required class="form-select" aria-label="Default select example">
+                                            <option value="">Seleccione el rol</option>
+                                            <?php
+                                                $records = $conn->prepare('SELECT * FROM roles');
+                                                $records->execute();
+                                                $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
+
+                                                foreach($resultado as $row){ ?>
+                                                <option value="<?php echo $row['id_rol'] ?>" <?php if($row['id_rol'] == $rol) echo 'selected' ?>><?php echo $row['nombre_rol'] ?></option>
+                                                <?php }?>
+                                            </select>
                                         </div>
                                         <div class="form-group mt-2">
                                             <select name="id_ciudad" required class="form-select" aria-label="Default select example">

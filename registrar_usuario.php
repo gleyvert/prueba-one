@@ -2,7 +2,7 @@
     require('database.php');
     require 'partials/roles.php';
 
-    if(isset($_SESSION['user_id']) && $id_rol == 3){
+    if(isset($_SESSION['user_id']) && $id_rol == 3 OR $id_rol == 2){
 
     }else{
         header('Location: 404.php');
@@ -100,6 +100,19 @@
                                             <input type="text" required name="edad" class="form-control" placeholder="Ingrese la edad">
                                         </div>
                                         <div class="form-group mt-2">
+                                        <select name="id_rol" required class="form-select" aria-label="Default select example">
+                                            <option value="">Seleccione el rol</option>
+                                            <?php
+                                                $records = $conn->prepare('SELECT * FROM roles');
+                                                $records->execute();
+                                                $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
+
+                                                foreach($resultado as $row){ ?>
+                                                <option value="<?php echo $row['id_rol'] ?>"><?php echo $row['nombre_rol'] ?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mt-2">
                                             <select name="id_ciudad" required class="form-select" aria-label="Default select example">
                                             <option value="">Seleccione la ciudad</option>
                                             <?php
@@ -130,13 +143,14 @@
                                             <th>Email</th>
                                             <th>Edad</th>
                                             <th>Ciudad</th>
+                                            <th>Rol del Usuario</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                             $usuario = $_SESSION['user_id'];
-                                            $records = $conn->prepare('SELECT id_usuario, usuarios.nombre, ciudades.nombre as nombre_ciudad, apellido, email, edad, usuarios.id_ciudad FROM usuarios LEFT JOIN ciudades ON usuarios.id_ciudad=ciudades.id_ciudad');
+                                            $records = $conn->prepare('SELECT id_usuario, usuarios.nombre, ciudades.nombre as nombre_ciudad, apellido, email, edad, usuarios.id_ciudad, usuarios.id_rol, nombre_rol FROM usuarios LEFT JOIN ciudades ON usuarios.id_ciudad=ciudades.id_ciudad LEFT JOIN roles ON usuarios.id_rol=roles.id_rol');
                                             //$records->bindParam(':usuario', $usuario);
                                             $records->execute();
                                             $results = $records->fetchAll(PDO::FETCH_ASSOC);
@@ -148,6 +162,7 @@
                                                     <td><?php echo $row['email'] ?></td>
                                                     <td><?php echo $row['edad'] ?></td>
                                                     <td><?php echo $row['nombre_ciudad'] ?></td>
+                                                    <td><?php echo $row['nombre_rol'] ?></td>
                                                     <td>
                                                         <a href="editar_usuario.php?id=<?php echo $row['id_usuario'] ?>">Editar<i class="fa-address-card-o"></i></a>
                                                         <a href="eliminar_usuario.php?id=<?php echo $row['id_usuario'] ?>">Eliminar</a>
