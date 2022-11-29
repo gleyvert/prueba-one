@@ -1,4 +1,5 @@
 -- phpMyAdmin SQL Dump
+<<<<<<< HEAD
 -- version 5.3.0-dev+20221125.2e001c186a
 -- https://www.phpmyadmin.net/
 --
@@ -6,6 +7,15 @@
 -- Tiempo de generación: 28-11-2022 a las 06:29:14
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
+=======
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 25-11-2022 a las 23:36:54
+-- Versión del servidor: 10.4.25-MariaDB
+-- Versión de PHP: 8.1.10
+>>>>>>> 4841ea37186f3b482d206f13b20b2a4db3f9acd7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,6 +37,13 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `ciudades`
 --
 
+<<<<<<< HEAD
+=======
+CREATE TABLE `ciudades` (
+  `id_ciudad` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+>>>>>>> 4841ea37186f3b482d206f13b20b2a4db3f9acd7
 
 --
 -- Volcado de datos para la tabla `ciudades`
@@ -45,6 +62,7 @@ INSERT INTO `ciudades` (`id_ciudad`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Estructura de tabla para la tabla `roles`
 --
 
@@ -65,6 +83,8 @@ INSERT INTO `roles` (`id_roles`, `nombre_rol`) VALUES
 -- --------------------------------------------------------
 
 --
+=======
+>>>>>>> 4841ea37186f3b482d206f13b20b2a4db3f9acd7
 -- Estructura de tabla para la tabla `tareas`
 --
 
@@ -103,14 +123,19 @@ CREATE TABLE `usuarios` (
   `email` varchar(200) DEFAULT NULL,
   `edad` int(11) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
+<<<<<<< HEAD
   `id_ciudad` int(11) NOT NULL,
   `id_rol` int(11) NOT NULL
+=======
+  `id_ciudad` int(11) NOT NULL
+>>>>>>> 4841ea37186f3b482d206f13b20b2a4db3f9acd7
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
+<<<<<<< HEAD
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `email`, `edad`, `password`, `id_ciudad`, `id_rol`) VALUES
 (1, 'gleyvert', 'lagos', 'gleyvertlagos@gmail.com', 30, '$2y$10$ururTPUJIAUJ11nQkAmPeeFwOuAT2DnZwDiXw/zk7fQCni5cYopha', 0, 0),
 (2, 'yunior4', 'diaz', 'yunior4@gmail.com', 27, '$2y$10$KUcF5GTNd6Wj13ZBFNRUIOZLvmuSOQV938hJ7JzldidS6ifWwthMG', 3, 0),
@@ -125,6 +150,17 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `email`, `edad`, `pa
 (32, 'gleyvert', 'lagos', 'yunior5@gmail.com', 30, '$2y$10$ZH/hy/y4vg0Sz/un0QR7Fua0V9Wsb0lxiBAbDmupU/j4Cea9Zx31G', 8, 0),
 (33, 'yuli', 'pereira', 'yulianachan@gmail.com', 30, '$2y$10$0TNe6kZF9qtbYdQsUp.Zke.Y15iaErxt.KhoF4kL6b4jbiYvhnoDO', 1, 0),
 (34, 'evert', 'lagos', 'evert@gmail.com', 55, '$2y$10$IF3Zo59PsaHekTqF5fIL.erPlcFANcBjUVYEnqQYot1HUs/KffUvC', 4, 3);
+=======
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `email`, `edad`, `password`, `id_ciudad`) VALUES
+(1, 'gleyvert', 'lagos', 'gleyvertlagos@gmail.com', 30, '$2y$10$ururTPUJIAUJ11nQkAmPeeFwOuAT2DnZwDiXw/zk7fQCni5cYopha', 0),
+(2, 'gleyvert', 'lagos', 'gleyvertlagos@gmail.com', 30, '$2y$10$He0hBB1xGdGTs795QsEkHuY2ZHfCm5WT3CmaB1ZUAVtE3yAx9Er.u', 0),
+(3, 'gleyvert', 'lagos', 'gleyvertlagos@gmail.com', 30, '$2y$10$jZdPXAJOtQFy.xre/b3ImO9Hr/vhKLHOM6zn7OnpMO4KP.xoYkCpu', 0),
+(4, 'gleyvert', 'lagos', 'gleyvertlagos@gmail.com', 30, '$2y$10$NXShRPN2jjQ.AliebNn5HeSLPJN0fKwbTjTkLE98MgB4wv9xj1A3a', 0),
+(6, 'gleyvert', 'lagossssss', 'yunior@gmail.com', 27, '$2y$10$l5P0v5W1pgJeA3W8ADE2QeMewFgLsVwn5lBB6gufX3ChySB6C8Qgq', 3),
+(7, 'yuliana', 'pereira', 'yuliana@gmail.com', 21, '$2y$10$qX0E43DSYaJTXm4.QGZdEO.dHYExfQkTdm3V3PTidP4rK/Tzxn.16', 0),
+(8, 'glenda', 'gomez', 'glenda@gmail.com', 2232, '$2y$10$Lnr0LroSFDboAMKc3zJQKuySOYf4czXQh9udy94gllbFuCJbr7uim', 4),
+(9, 'yunior', 'diaz', 'yunior2@gmail.com', 27, '$2y$10$OS7hY8foVKnInC3bhspjTuZvAjkPm9umvYN7Wi4X44meRoHzI8ahu', 1);
+>>>>>>> 4841ea37186f3b482d206f13b20b2a4db3f9acd7
 
 --
 -- Índices para tablas volcadas
@@ -137,12 +173,15 @@ ALTER TABLE `ciudades`
   ADD PRIMARY KEY (`id_ciudad`);
 
 --
+<<<<<<< HEAD
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id_roles`);
 
 --
+=======
+>>>>>>> 4841ea37186f3b482d206f13b20b2a4db3f9acd7
 -- Indices de la tabla `tareas`
 --
 ALTER TABLE `tareas`
@@ -165,6 +204,7 @@ ALTER TABLE `ciudades`
   MODIFY `id_ciudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+<<<<<<< HEAD
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -175,12 +215,22 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `tareas`
   MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+=======
+-- AUTO_INCREMENT de la tabla `tareas`
+--
+ALTER TABLE `tareas`
+  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+>>>>>>> 4841ea37186f3b482d206f13b20b2a4db3f9acd7
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
+<<<<<<< HEAD
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+=======
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+>>>>>>> 4841ea37186f3b482d206f13b20b2a4db3f9acd7
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
