@@ -16,19 +16,22 @@
             $nombre= $actividad['nombre'];
             $descripcion = $actividad['descripcion'];
             $id_actividad = $actividad['id_tarea'];
+            $status_tarea = $actividad['id_status'];
         }
 
         if(isset($_POST['guardar_tarea'])){
             $id = $_GET['id'];
             $nombre_post = $_POST['nombre_a'];
             $descripcion_post = $_POST['descripcion_a'];
+            $status_tarea_post = $_POST['id_status'];
             echo $descripcion_post."yes";
 
-            $sql = "UPDATE tareas SET nombre= :nombre, descripcion=:descripcion WHERE id_tarea=:id";
+            $sql = "UPDATE tareas SET nombre= :nombre, descripcion=:descripcion, id_status=:id_status WHERE id_tarea=:id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':nombre', $nombre_post);
             $stmt->bindParam(':descripcion', $descripcion_post);
+            $stmt->bindParam(':id_status', $status_tarea_post);
 
             $message = '';
 
@@ -79,6 +82,19 @@
                                         </div>
                                         <div class="form-group mt-2">
                                             <textarea name="descripcion_a" rows="2" class="form-control" placeholder="Ingrese la descripcion de la actividad"><?php echo $descripcion ?></textarea>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <select name="id_status" required class="form-select" aria-label="Default select example">
+                                            <option value="">Seleccione el status</option>
+                                            <?php
+                                                $records = $conn->prepare('SELECT * FROM status_tareas');
+                                                $records->execute();
+                                                $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
+
+                                                foreach($resultado as $row){ ?>
+                                                <option value="<?php echo $row['id_status'] ?>" <?php if($row['id_status'] == $status_tarea) echo 'selected' ?>><?php echo $row['nombre'] ?></option>
+                                                <?php }?>
+                                            </select>
                                         </div>
                                         <div class="d-grid gap-2">
                                              <button class="btn btn-success mt-2" name="guardar_tarea">Actualizar</button>

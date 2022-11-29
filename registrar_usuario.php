@@ -76,11 +76,22 @@
                         </div> -->
                         <div class="row">
                             <div class="col-md-4">
-                            <?php if(isset($_SESSION['message']) && $_SESSION['message'] != '') {
+                           <!-- ALERTA 1 -->
+                           <?php if(isset($_SESSION['message']) && $_SESSION['message'] != '') {
                                  $message = $_SESSION['message'];
                                   $_SESSION['message'] = '';
                                 ?>
                                 <div class="alert alert-<?php echo $_SESSION['message_type']?> alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                 <?= $message ?>
+                               </div>
+                                <?php }  ?>
+                                  <!-- ALERTA 2 -->
+                                <?php if(isset($_SESSION['message2']) && $_SESSION['message2'] != '') {
+                                 $message = $_SESSION['message2'];
+                                  $_SESSION['message2'] = '';
+                                ?>
+                                <div class="alert alert-<?php echo $_SESSION['message_type2']?> alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                  <?= $message ?>
                                </div>

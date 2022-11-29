@@ -76,11 +76,22 @@
                         </div> -->
                         <div class="row">
                             <div class="col-md-4">
+                                <!-- ALERTA 1-->
                                 <?php if(isset($_SESSION['message']) && $_SESSION['message'] != '') {
                                  $message = $_SESSION['message'];
                                   $_SESSION['message'] = '';
                                 ?>
                                 <div class="alert alert-<?php echo $_SESSION['message_type']?> alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                 <?= $message ?>
+                               </div>
+                                <?php }  ?>
+                                <!-- ALERTA 2 -->
+                                <?php if(isset($_SESSION['message2']) && $_SESSION['message2'] != '') {
+                                 $message = $_SESSION['message2'];
+                                  $_SESSION['message2'] = '';
+                                ?>
+                                <div class="alert alert-<?php echo $_SESSION['message_type2']?> alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                  <?= $message ?>
                                </div>
@@ -92,6 +103,19 @@
                                         </div>
                                         <div class="form-group mt-2">
                                             <textarea name="descripcion_a" rows="2" class="form-control" placeholder="Ingrese la descripcion de la actividad"></textarea>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <select name="id_status" required class="form-select" aria-label="Default select example">
+                                            <option value="">Seleccione el status</option>
+                                            <?php
+                                                $records = $conn->prepare('SELECT * FROM status_tareas');
+                                                $records->execute();
+                                                $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
+
+                                                foreach($resultado as $row){ ?>
+                                                <option value="<?php echo $row['id_status'] ?>"><?php echo $row['nombre'] ?></option>
+                                                <?php }?>
+                                            </select>
                                         </div>
                                         <div class="d-grid gap-2">
                                              <button class="btn btn-success mt-2" name="guardar_tarea">Guardar Tarea</button>
@@ -106,13 +130,14 @@
                                             <th>Nombre</th>
                                             <th>Descripcion</th>
                                             <th>Fecha de Creacion</th>
+                                            <th>Estatus</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
+                                        <?php
                                             $usuario = $_SESSION['user_id'];
-                                            $records = $conn->prepare('SELECT nombre, descripcion, id_tarea, creado_en FROM tareas WHERE id_usuario=:usuario ');
+                                            $records = $conn->prepare('SELECT tareas.nombre, descripcion, id_tarea, creado_en, status_tareas.nombre as nombre_status FROM tareas LEFT JOIN status_tareas ON  tareas.id_status=status_tareas.id_status WHERE id_usuario=:usuario');
                                             $records->bindParam(':usuario', $usuario);
                                             $records->execute();
                                             $results = $records->fetchAll(PDO::FETCH_ASSOC);
@@ -122,6 +147,7 @@
                                                     <td><?php echo $row['nombre'] ?></td>
                                                     <td><?php echo $row['descripcion'] ?></td>
                                                     <td><?php echo $row['creado_en'] ?></td>
+                                                    <td><?php echo $row['nombre_status'] ?></td>
                                                     <td>
                                                         <a href="editar.php?id=<?php echo $row['id_tarea'] ?>">Editar<i class="fa-address-card-o"></i></a>
                                                         <a href="eliminar.php?id=<?php echo $row['id_tarea'] ?>">Eliminar</a>
