@@ -124,7 +124,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group mt-2">
-                                            <select name="id_ciudad" required class="form-select" aria-label="Default select example">
+                                            <select name="id_ciudad" id="id_ciudad" required class="form-select" aria-label="Default select example">
                                             <option value="">Seleccione la ciudad</option>
                                             <?php
                                                 $records = $conn->prepare('SELECT * FROM ciudades');
@@ -134,6 +134,13 @@
                                                 foreach($resultado as $row){ ?>
                                                 <option value="<?php echo $row['id_ciudad'] ?>"><?php echo $row['nombre'] ?></option>
                                                 <?php }?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <select name="id_municipio" id="id_municipio" required class="form-select" aria-label="Default select example">
+                                            <option value="">Seleccione el municipio</option>
+                                                
+                                           
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -175,8 +182,10 @@
                                                     <td><?php echo $row['nombre_ciudad'] ?></td>
                                                     <td><?php echo $row['nombre_rol'] ?></td>
                                                     <td>
-                                                        <a href="editar_usuario.php?id=<?php echo $row['id_usuario'] ?>">Editar<i class="fa-address-card-o"></i></a>
-                                                        <a href="eliminar_usuario.php?id=<?php echo $row['id_usuario'] ?>">Eliminar</a>
+                                                    <div class="btn-group" role="group" aria-label="Basic example">    
+                                                        <a class="btn btn-outline-success" href="editar_usuario.php?id=<?php echo $row['id_usuario'] ?>">Editar<i class="fa-address-card-o"></i></a>
+                                                        <a class="btn btn-outline-danger" href="eliminar_usuario.php?id=<?php echo $row['id_usuario'] ?>">Eliminar</a>
+                                                    </div>
                                                     </td>
                                                 </tr>
 
@@ -210,5 +219,6 @@
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="assets/demo/chart-pie-demo.js"></script>
+        <script src="js/app.js"></script>
     </body>
 </html>

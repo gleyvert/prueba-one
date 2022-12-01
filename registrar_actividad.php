@@ -7,6 +7,7 @@
  }else{
      header('Location: 404.php');
  }
+
 ?>
 
 <!DOCTYPE html>
@@ -137,22 +138,32 @@
                                     <tbody>
                                         <?php
                                             $usuario = $_SESSION['user_id'];
-                                            $records = $conn->prepare('SELECT tareas.nombre, descripcion, id_tarea, creado_en, status_tareas.nombre as nombre_status FROM tareas LEFT JOIN status_tareas ON  tareas.id_status=status_tareas.id_status WHERE id_usuario=:usuario');
+                                            $records = $conn->prepare('SELECT tareas.nombre, descripcion, id_tarea, creado_en, status_tareas.nombre as nombre_status FROM tareas LEFT JOIN status_tareas ON  tareas.id_status=status_tareas.id_status WHERE id_usuario=:usuario ORDER BY tareas.id_status ASC');
                                             $records->bindParam(':usuario', $usuario);
                                             $records->execute();
                                             $results = $records->fetchAll(PDO::FETCH_ASSOC);
 
-                                            foreach($results as $row){ ?>
+                                            foreach($results as $row){ 
+                                                $status = array(
+                                                    'pendiente'=>'danger',
+                                                    'en_curso' =>'warning',
+                                                    'realizada'=>'success'
+                                                );
+                                                $clase= $status[$row['nombre_status']];
+                                                ?>
                                                 <tr>
                                                     <td><?php echo $row['nombre'] ?></td>
                                                     <td><?php echo $row['descripcion'] ?></td>
                                                     <td><?php echo $row['creado_en'] ?></td>
-                                                    <td><?php echo $row['nombre_status'] ?></td>
+                                                    <td><span class="badge badge-<?php echo $clase?>"><?php echo $row['nombre_status'] ?></span></td>
                                                     <td>
-                                                        <a href="editar.php?id=<?php echo $row['id_tarea'] ?>">Editar<i class="fa-address-card-o"></i></a>
-                                                        <a href="eliminar.php?id=<?php echo $row['id_tarea'] ?>">Eliminar</a>
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <a class="btn btn-outline-success" href="editar.php?id=<?php echo $row['id_tarea'] ?>">Editar<i class=""></i></a>
+                                                        <a class="btn btn-outline-danger" href="eliminar.php?id=<?php echo $row['id_tarea'] ?>">Eliminar</a>
                                                     </td>
+                                                    </div>
                                                 </tr>
+
                                           <?php  } ?>
                                     </tbody>
                                 </table>
