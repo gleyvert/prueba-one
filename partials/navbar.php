@@ -13,6 +13,11 @@
         }
     }
 
+    $search='';
+    if(isset($_POST['search'])){
+        $search = $_POST['search'];
+    }
+
 ?>
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -21,10 +26,10 @@
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <form action="registrar_usuario.php" method="POST" class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Buscar usuario..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                    <input id="search" name="search" value="<?php echo $search?>" class="form-control mr-sm-2" type="search" placeholder="Buscar usuario..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="buttonsearch" type="submit"><i class="fas fa-search"></i></button>
                 </div>
             </form>
             <!-- Navbar-->

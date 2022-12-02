@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2022 a las 22:14:29
+-- Tiempo de generación: 03-12-2022 a las 00:56:58
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -45,6 +45,28 @@ INSERT INTO `ciudades` (`id_ciudad`, `nombre`) VALUES
 (6, 'barcelona'),
 (7, 'anaco'),
 (8, 'cumana');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `municipios`
+--
+
+CREATE TABLE `municipios` (
+  `id_municipio` int(11) NOT NULL,
+  `municipio` varchar(255) NOT NULL,
+  `id_ciudad` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `municipios`
+--
+
+INSERT INTO `municipios` (`id_municipio`, `municipio`, `id_ciudad`) VALUES
+(1, 'uracoa', 0),
+(2, 'maturin', 1),
+(3, 'puerto la cruz', 0),
+(4, 'maracaibo', 0);
 
 -- --------------------------------------------------------
 
@@ -115,12 +137,18 @@ INSERT INTO `tareas` (`id_tarea`, `nombre`, `descripcion`, `creado_en`, `id_usua
 (16, 'cambios con git', 'git ass .\r\ngit commit -m \"nombre de leso\"\r\ngit push origin main', '2022-11-25 19:04:41', 7, 2),
 (18, 'estatus de tareas ', 'si esta pendiente en curso o realizada.', '2022-11-28 23:59:34', 7, 3),
 (19, 'enviar correo', 'cuando se registre una tarea y cuando se registre el usuario.', '2022-11-29 00:00:40', 7, 3),
-(21, 'corregir los errores', 'seguir estudiando para futuros proyectos', '2022-11-29 19:47:37', 7, 1),
+(21, 'corregir los errores', 'seguir estudiando para futuros proyectos', '2022-11-29 19:47:37', 7, 2),
 (22, 'mi tarea de ahora es seguir programando', 'la vida te da sorpresas sorpresas te da la vida hay dios', '2022-11-29 19:51:20', 16, 1),
 (24, 'hola que tal como estas', 'la vida loca loca', '2022-11-29 19:58:43', 16, 3),
 (25, 'la milagrosa', 'manana comer pollo a la broster otra vez', '2022-11-29 20:00:42', 16, 1),
 (32, 'hola soy yunior', 'soy programador', '2022-11-29 20:24:44', 17, 1),
-(33, 'crud ', 'con javascript con ajax con php y mysql', '2022-11-29 20:29:34', 7, 1);
+(33, 'crud ', 'con javascript con ajax con php y mysql', '2022-11-29 20:29:34', 7, 3),
+(34, 'color a cada status', 'colocar color', '2022-12-01 17:16:39', 7, 3),
+(35, 'ordenar la lista  ', 'los pendientes primero', '2022-12-01 17:17:29', 7, 3),
+(36, 'el select dependiente', 'crear tabla y agregar el selec dependiente. ', '2022-12-01 17:18:23', 7, 3),
+(37, 'el filtro de usuaro', 'ponerlo a funcionar con php', '2022-12-01 17:20:33', 7, 1),
+(38, 'integrar el data table', 'con boostrap y ajax', '2022-12-01 18:09:07', 7, 1),
+(39, 'otro crud para agregar ciudades', 'otro crud para agregar ciudades y municipios', '2022-12-01 21:55:05', 7, 1);
 
 -- --------------------------------------------------------
 
@@ -148,7 +176,7 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `email`, `edad`, `pa
 (7, 'yuliana', 'pereira', 'yuliana@gmail.com', 21, '$2y$10$qX0E43DSYaJTXm4.QGZdEO.dHYExfQkTdm3V3PTidP4rK/Tzxn.16', 0, 3),
 (8, 'glenda', 'gomez', 'glenda@gmail.com', 2232, '$2y$10$Lnr0LroSFDboAMKc3zJQKuySOYf4czXQh9udy94gllbFuCJbr7uim', 4, 0),
 (9, 'yunior', 'diaz', 'yunior2@gmail.com', 27, '$2y$10$OS7hY8foVKnInC3bhspjTuZvAjkPm9umvYN7Wi4X44meRoHzI8ahu', 1, 0),
-(10, 'yunior', 'diaz', 'yunior6@gmail.com', 27, '$2y$10$azs.r123FfPtO9QSp3pZc.424uMgcJUMUtel25.qKm92ESJhM9Tt6', 1, 0),
+(10, 'yunior', 'diaz', 'yunior6@gmail.com', 27, '$2y$10$my3nsBQPXgoQH8J4UqO14.N9Ue726lOWFpaPIv7txdXyqggJns5US', 1, 3),
 (11, 'eduardo', 'diaz', 'eduardo@gmail.com', 27, '$2y$10$tlNZzzmCJ.pLzhn7n6wn4uhubOemHIdlGuUEtheVk/D2Rk1zCF7.C', 8, 3),
 (16, 'gleyvert', 'lagos', 'gleyvertlagos@gmail.com', 30, '$2y$10$v1tK9ZIMjrrTOLAruFEz2elg9R81.812SZ6V2btp22b.HNc/x81wG', 3, 3),
 (17, 'yunior ', 'diaz', 'yuniordiaz1@gmail.com', 27, '$2y$10$OZFhc589jo3duXLIzaC2Y.iXJf9/eI7EoHZFr9spvGq2De0OJ7Feu', 1, 3);
@@ -162,6 +190,12 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `email`, `edad`, `pa
 --
 ALTER TABLE `ciudades`
   ADD PRIMARY KEY (`id_ciudad`);
+
+--
+-- Indices de la tabla `municipios`
+--
+ALTER TABLE `municipios`
+  ADD PRIMARY KEY (`id_municipio`);
 
 --
 -- Indices de la tabla `roles`
@@ -198,6 +232,12 @@ ALTER TABLE `ciudades`
   MODIFY `id_ciudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT de la tabla `municipios`
+--
+ALTER TABLE `municipios`
+  MODIFY `id_municipio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `status_tareas`
 --
 ALTER TABLE `status_tareas`
@@ -207,7 +247,7 @@ ALTER TABLE `status_tareas`
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

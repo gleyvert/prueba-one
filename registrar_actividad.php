@@ -125,6 +125,9 @@
                                 </div>
                             </div>
                             <div class="col-md-8">
+                                <div class="form-group float-end">
+                                    <input type="search" class="form-control" placeholder="Buscar Tarea" id="search-tarea">
+                                </div>
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -135,7 +138,10 @@
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="body-tareasId">
+
+                                    </tbody>
+                                    <tbody id="body-tareasId2">
                                         <?php
                                             $usuario = $_SESSION['user_id'];
                                             $records = $conn->prepare('SELECT tareas.nombre, descripcion, id_tarea, creado_en, status_tareas.nombre as nombre_status FROM tareas LEFT JOIN status_tareas ON  tareas.id_status=status_tareas.id_status WHERE id_usuario=:usuario ORDER BY tareas.id_status ASC');
@@ -194,5 +200,6 @@
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="assets/demo/chart-pie-demo.js"></script>
+        <script src="js/app.js"></script>
     </body>
 </html>
