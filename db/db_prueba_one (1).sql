@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-12-2022 a las 00:56:58
+-- Tiempo de generación: 04-12-2022 a las 00:36:25
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -146,9 +146,14 @@ INSERT INTO `tareas` (`id_tarea`, `nombre`, `descripcion`, `creado_en`, `id_usua
 (34, 'color a cada status', 'colocar color', '2022-12-01 17:16:39', 7, 3),
 (35, 'ordenar la lista  ', 'los pendientes primero', '2022-12-01 17:17:29', 7, 3),
 (36, 'el select dependiente', 'crear tabla y agregar el selec dependiente. ', '2022-12-01 17:18:23', 7, 3),
-(37, 'el filtro de usuaro', 'ponerlo a funcionar con php', '2022-12-01 17:20:33', 7, 1),
-(38, 'integrar el data table', 'con boostrap y ajax', '2022-12-01 18:09:07', 7, 1),
-(39, 'otro crud para agregar ciudades', 'otro crud para agregar ciudades y municipios', '2022-12-01 21:55:05', 7, 1);
+(37, 'el filtro de usuaro', 'ponerlo a funcionar con php', '2022-12-01 17:20:33', 7, 3),
+(39, 'otro crud para agregar ciudades', 'otro crud para agregar ciudades y municipios', '2022-12-01 21:55:05', 7, 1),
+(41, 'agregar y editar registros', 'agregar y editar registros con ventana modal', '2022-12-03 00:03:09', 7, 1),
+(65, 'colocar una precarga', 'precarga en php', '2022-12-03 00:07:16', 7, 1),
+(66, 'aprender a utilizar twilio', 'aprender', '2022-12-03 00:12:08', 7, 1),
+(67, 'hola', 'sssss', '2022-12-03 18:13:09', 7, 1),
+(68, 'asd', 'sgrr', '2022-12-03 18:13:31', 7, 1),
+(69, 'asd', 'ssss', '2022-12-03 18:13:54', 7, 1);
 
 -- --------------------------------------------------------
 
@@ -247,7 +252,7 @@ ALTER TABLE `status_tareas`
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

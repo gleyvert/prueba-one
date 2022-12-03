@@ -119,7 +119,7 @@
                                             </select>
                                         </div>
                                         <div class="d-grid gap-2">
-                                             <button class="btn btn-success mt-2" name="guardar_tarea">Guardar Tarea</button>
+                                             <button class="btn btn-success mt-2" name="guardar_tarea" id="guardar_tarea">Guardar Tarea</button>
                                         </div>
                                     </form>
                                 </div>
