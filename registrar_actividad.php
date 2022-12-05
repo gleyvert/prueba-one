@@ -32,7 +32,9 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
+                    <button>eii<i class='fas fa-edit'></i></button>
                         <h1 class="mt-4">Registrar Actividad</h1>
+                       
                        <!-- <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
                             <li class="breadcrumb-item active">Registrar Actividad</li>
@@ -131,11 +133,11 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Nombre</th>
+                                            <th>Nombre </th>
                                             <th>Descripcion</th>
                                             <th>Fecha de Creacion</th>
                                             <th>Estatus</th>
-                                            <th>Acciones</th>
+                                            <th>Acciones </th>
                                         </tr>
                                     </thead>
                                     <tbody id="body-tareasId">
