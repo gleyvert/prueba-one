@@ -65,36 +65,42 @@
                         <div class="row">
                            
                             <div class="col-md-11">
-                                <table class="table table-bordered">
+                                <table id="tabla-ajax" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
                                             <th>Descripcion</th>
                                             <th>Fecha de Creacion</th>
-                                            <th>Acciones</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php 
-                                            $usuario = $_SESSION['user_id'];
-                                            $records = $conn->prepare('SELECT nombre, descripcion, id_tarea, creado_en FROM tareas WHERE id_usuario=:usuario ');
-                                            $records->bindParam(':usuario', $usuario);
-                                            $records->execute();
-                                            $results = $records->fetchAll(PDO::FETCH_ASSOC);
+                                    <tbody id="tabla-tr">
 
-                                            foreach($results as $row){ ?>
+                                    </tbody>
+                                    <!--
+                                        <tbody id="tabla-php">
+                                        <?php 
+                                           // $usuario = $_SESSION['user_id'];
+                                            //$records = $conn->prepare('SELECT nombre, descripcion, id_tarea, creado_en FROM tareas WHERE id_usuario=:usuario ');
+                                           // $records->bindParam(':usuario', $usuario);
+                                           // $records->execute();
+                                           // $results = $records->fetchAll(PDO::FETCH_ASSOC);
+
+                                            //foreach($results as $row){ ?>
                                                 <tr>
-                                                    <td><?php echo $row['nombre'] ?></td>
-                                                    <td><?php echo $row['descripcion'] ?></td>
-                                                    <td><?php echo $row['creado_en'] ?></td>
+                                                    <td><?php //echo $row['nombre'] ?></td>
+                                                    <td><?php //echo $row['descripcion'] ?></td>
+                                                    <td><?php //echo $row['creado_en'] ?></td>
                                                     <td>
-                                                        <a href="editar.php?id=<?php echo $row['id_tarea'] ?>">Editar<i class="fa-address-card-o"></i></a>
-                                                        <a href="eliminar.php?id=<?php echo $row['id_tarea'] ?>">Eliminar</a>
+                                                        <a href="editar.php?id=<?php //echo $row['id_tarea'] ?>">Editar<i class="fa-address-card-o"></i></a>
+                                                        <a href="eliminar.php?id=<?php //echo $row['id_tarea'] ?>">Eliminar</a>
                                                     </td>
                                                 </tr>
 
-                                          <?php  } ?>
+                                          <?php // } ?>
                                     </tbody>
+                                   */ -->
                                 </table>
                             </div>
                         </div>
