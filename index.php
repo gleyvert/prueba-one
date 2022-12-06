@@ -64,7 +64,7 @@ if (isset($_SESSION['user_id'])) {
                         </div> -->
         <div class="row">
 
-            <div class="col-md-11">
+            <div class="col-md-12">
                 <table id="tabla-ajax" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
@@ -113,10 +113,7 @@ if (isset($_SESSION['user_id'])) {
                 </table>
 
             </div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-            </button>
+          
 
             <!-- Modal -->
             <div class="modal fade" id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

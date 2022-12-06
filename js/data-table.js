@@ -5,9 +5,6 @@ $(document).ready(function () {
    let template = '';
    tabla_tarea = $("#tabla-ajax").DataTable({
     'ajax': 'consultas/tabla_tareas.php',
-
-   
-    
     "ordering": false,
      
     //Para cambiar el lenguaje a español
