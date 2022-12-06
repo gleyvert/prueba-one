@@ -5,7 +5,7 @@ $(document).ready(function () {
 
    
     
-
+    order: [[4, 'asc']],
      
     //Para cambiar el lenguaje a español
 "language": {
@@ -55,23 +55,35 @@ $(document).ready(function () {
         $('#tabla-php').hide();
 
 
-        
-const editarTarea=(id_tarea)=>{
+    
+
+});
+
+
+function editarTarea(id_tarea) {
+    console.log(id_tarea);
      $.ajax({
-        url: 'consultas/tabla_tareas.php',
+        url: "consultas/editar_tarea.php",
         type: "POST",
-        data: {id_tarea},
-        dataType: 'json',
+        data: {id_tarea:id_tarea},
+        //dataType: 'json',
         success: function(response) {
-           // console.log(response[0]);
-           document.querySelector("#eid_grupo").value=response[0].id_grupo;
-           document.querySelector("#enombre_grupo").value=response[0].nombre_grupo;
-            document.querySelector("#eobservaciones").value=response[0].observaciones;
+            let tarea = JSON.parse(response);
+            console.log(tarea[0]['nombre']);
+            
+            $('#nombre_tarea').val(tarea[0]['nombre']);
+            $('#descripcion_tarea').val(tarea[0]['descripcion']);
+            $('#option').val(tarea[0]['id_status']);
+            console.log(tarea[0]['id_status']);
+           //document.querySelector("#eid_grupo").value=response[0].id_grupo;
+           //document.querySelector("#enombre_grupo").value=response[0].nombre_grupo;
+            //document.querySelector("#eobservaciones").value=response[0].observaciones;
         }
     });
   }
 
-        $(document).on('click', '.task-item', function(){
+ 
+      /*  $(document).on('click', '.task-item', function(){
             let element = $(this)[0].parentElement.parentElement;
             let id= $(element).attr('taskId');
             $.post('task-single.php', {id}, function(response){
@@ -85,4 +97,4 @@ const editarTarea=(id_tarea)=>{
             
         
         })
-});
+     */

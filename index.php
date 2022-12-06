@@ -72,6 +72,7 @@ if (isset($_SESSION['user_id'])) {
                             <th>Nombre</th>
                             <th>Descripcion</th>
                             <th>Fecha de Creacion</th>
+                            <th>Estatus</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -122,18 +123,42 @@ if (isset($_SESSION['user_id'])) {
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
 
                         <div class="modal-body">
-                            ...
+                            <div class="">
+                                <form class="form">
+                                    <div class="form-group">
+                                        <label for="">Nombre de tarea</label>
+                                        <input type="text" id="nombre_tarea" value="" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Descripcion de tarea</label>
+                                        <input type="text" id="descripcion_tarea" value="" class="form-control">
+                                    </div>
+                                    <div class="form-group mt-2">
+                                            <select name="id_status" id="option" required class="form-select" aria-label="Default select example">
+                                            <option id="" value="">Seleccione el status</option>
+                                            <?php
+                                                $records = $conn->prepare('SELECT * FROM status_tareas');
+                                                $records->execute();
+                                                $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
+
+                                                foreach($resultado as $row){ ?>
+                                                <option id="" value="<?php echo $row['id_status'] ?>"><?php echo $row['nombre'] ?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                </form>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary" onclick="hola()">Save changes</button>
                         </div>
                     </div>
                 </div>
@@ -143,6 +168,6 @@ if (isset($_SESSION['user_id'])) {
 
     <?php require 'partials/footer2.php'; ?>
 <?php else : ?>
-    <?php //require 'partials/body.php'; 
+    <?php require 'partials/body.php';
     ?>
 <?php endif; ?>

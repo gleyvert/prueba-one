@@ -24,8 +24,8 @@
 
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
-       
-        <script src="./js/scripts2.js"></script>
         <script src="./js/data-table.js"></script>
+        <script src="./js/scripts2.js"></script>
+        
     </body>
 </html>
