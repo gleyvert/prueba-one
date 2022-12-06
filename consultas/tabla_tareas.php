@@ -20,8 +20,8 @@ include '../database.php';
         $id_status = $row['id_status'];
         $id = $row['id_tarea'];
         $button = '<button class="btn btn-primary btn-sm btnEditar" data-toggle="modal" data-target="#ModalEditar" onclick="editarTarea('.$id.')">Editar</button>';
-        $button2 = '<button class="btn btn-primary btn-sm btnEditar" data-toggle="modal" data-target="#ModalEditar" onclick="editarTarea('.$id.')">Editar</button>';
-        $span  =  '<span class="badge badge-'.$clase.'"><p hidden>'.$id_status.'</p>' .$nombre_status.'</span>';
+        $button2 = '<button class="btn btn-danger btn-sm btnEliminar" onclick="eliminarTarea('.$id.')">Eliminar</button>';
+        $span  =  '<span class="badge badge-'.$clase.'">' .$nombre_status.'</span>';
         $output['data'][] = array(
             $row['id_tarea'],
             $row['nombre'],

@@ -1,11 +1,14 @@
+
+var tabla_tarea;
+
 $(document).ready(function () {
    let template = '';
-   tabla_grupo = $("#tabla-ajax").DataTable({
+   tabla_tarea = $("#tabla-ajax").DataTable({
     'ajax': 'consultas/tabla_tareas.php',
 
    
     
-    order: [[4, 'asc']],
+    "ordering": false,
      
     //Para cambiar el lenguaje a español
 "language": {
@@ -69,12 +72,13 @@ function editarTarea(id_tarea) {
         //dataType: 'json',
         success: function(response) {
             let tarea = JSON.parse(response);
-            console.log(tarea[0]['nombre']);
-            
+            //console.log(tarea[0]['nombre']);
+            $('#id_tarea').val(tarea[0]['id_tarea']);
+            console.log(tarea[0]['id_tarea']);
             $('#nombre_tarea').val(tarea[0]['nombre']);
             $('#descripcion_tarea').val(tarea[0]['descripcion']);
             $('#option').val(tarea[0]['id_status']);
-            console.log(tarea[0]['id_status']);
+            //console.log(tarea[0]['id_status']);
            //document.querySelector("#eid_grupo").value=response[0].id_grupo;
            //document.querySelector("#enombre_grupo").value=response[0].nombre_grupo;
             //document.querySelector("#eobservaciones").value=response[0].observaciones;
@@ -82,6 +86,56 @@ function editarTarea(id_tarea) {
     });
   }
 
+  function eliminarTarea(id_tarea){
+    console.log(id_tarea);
+    if (confirm("Esta seguro de que quiere eliminar la tarea?") == true) {
+        $.ajax({
+            url: "consultas/eliminar_tarea.php",
+            type: "POST",
+            data: {id_tarea:id_tarea},
+            //dataType: 'json',
+            success: function(response) {
+                let tarea = JSON.parse(response);
+                console.log(response);
+                //console.log(tarea[0]['nombre']);
+              alert(tarea);
+              tabla_tarea.ajax.reload(null, true);   
+            }
+        });
+        
+      } 
+
+  }
+
+  
+  function guardarTarea(){
+    var select_status= $('#option').val();
+    var input_nombre = $('#nombre_tarea').val();
+    var input_descripcion = $('#descripcion_tarea').val();
+    var input_id_tarea = $('#id_tarea').val();
+
+    console.log(select_status);
+    console.log(input_nombre);
+    console.log(input_descripcion);
+    console.log(input_id_tarea);
+
+
+    $.ajax({
+        type: "POST",
+        url: "consultas/update_editar.php",
+        data: {select_status,input_nombre,input_descripcion,input_id_tarea},
+        //dataType: "dataType",
+        success: function (response) {
+           // var message = JSON.parse(response);
+            
+            tabla_tarea.ajax.reload(null, true);  
+            $("#ModalEditar").modal("hide"); 
+
+            //alert(response);
+        }
+    });
+
+  }
  
       /*  $(document).on('click', '.task-item', function(){
             let element = $(this)[0].parentElement.parentElement;

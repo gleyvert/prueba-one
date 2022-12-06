@@ -133,6 +133,9 @@ if (isset($_SESSION['user_id'])) {
                             <div class="">
                                 <form class="form">
                                     <div class="form-group">
+                                        <input type="hidden" id="id_tarea">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="">Nombre de tarea</label>
                                         <input type="text" id="nombre_tarea" value="" class="form-control">
                                     </div>
@@ -142,14 +145,14 @@ if (isset($_SESSION['user_id'])) {
                                     </div>
                                     <div class="form-group mt-2">
                                             <select name="id_status" id="option" required class="form-select" aria-label="Default select example">
-                                            <option id="" value="">Seleccione el status</option>
+                                            <option  value="">Seleccione el status</option>
                                             <?php
                                                 $records = $conn->prepare('SELECT * FROM status_tareas');
                                                 $records->execute();
                                                 $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
 
                                                 foreach($resultado as $row){ ?>
-                                                <option id="" value="<?php echo $row['id_status'] ?>"><?php echo $row['nombre'] ?></option>
+                                                <option  value="<?php echo $row['id_status'] ?>"><?php echo $row['nombre'] ?></option>
                                                 <?php }?>
                                             </select>
                                         </div>
@@ -158,7 +161,7 @@ if (isset($_SESSION['user_id'])) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="hola()">Save changes</button>
+                            <button type="button" class="btn btn-primary" onclick="guardarTarea()">Save changes</button>
                         </div>
                     </div>
                 </div>
