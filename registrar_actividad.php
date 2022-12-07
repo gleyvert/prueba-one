@@ -20,6 +20,7 @@
         <meta name="author" content="" />
         <title>Charts - SB Admin</title>
         <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
         <link href="./css/styles2.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -120,7 +121,7 @@
                                             </select>
                                         </div>
                                         <div class="d-grid gap-2">
-                                             <button  class="btn btn-success mt-2" name="guardar_tarea" id="guardar_tarea">Guardar Tarea</button>
+                                             <button class="btn btn-success mt-2" name="guardar_tarea" id="guardar_tarea">Guardar Tarea</button>
                                         </div>
                                     </form>
                                 </div>
@@ -201,6 +202,7 @@
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="assets/demo/chart-pie-demo.js"></script>
+        <script src="./vendor/sweetAlert2/sweetalert2.all.min.js"></script>
         <script src="js/app.js"></script>
     </body>
 </html>

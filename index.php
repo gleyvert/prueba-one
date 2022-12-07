@@ -161,8 +161,8 @@ if (isset($_SESSION['user_id'])) {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="guardarTarea()">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" onclick="guardarTarea()">Guardar tarea</button>
                         </div>
                     </div>
                 </div>

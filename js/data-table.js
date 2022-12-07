@@ -92,7 +92,8 @@ function editarTarea(id_tarea) {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Si, borrar esto!',
+        cancelButtonText: 'Calcelar'
       }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
@@ -138,10 +139,16 @@ function editarTarea(id_tarea) {
         //dataType: "dataType",
         success: function (response) {
            // var message = JSON.parse(response);
-            
+            // var tarea = JSON.parse(response);
+            console.log(response);
             tabla_tarea.ajax.reload(null, true);  
             $("#ModalEditar").modal("hide"); 
-
+          
+            Swal.fire(
+                'Editado!',
+                'Tarea editada satisfactorimante',
+                'success'
+              )
             //alert(response);
         }
     });

@@ -139,17 +139,26 @@ $(document).ready(function(){
                     console.log(response);
                     let tareas = JSON.parse(response);
                     let template = '';
-
+                    var clase = '';
                     console.log(tareas);
-                    
+                    var status = {
+                        pendiente: 'danger', 
+                        en_curso: 'warning', 
+                        realizada: 'success'
+                    };
+                   
+                  
                     tareas.forEach(tareas => {
-                        console.log(tareas);
+                        //console.log(tareas);
+                        var clase = status[tareas.nombre_status];
+                        console.log(clase);
+                        //console.log(status);
                         template += `
                         <tr>
                             <td>${tareas.nombre}</td>
                             <td>${tareas.descripcion}</td>
                             <td>${tareas.creado_en}</td>
-                            <td>${tareas.nombre_estatus}</td>
+                            <td><span class="badge badge-${clase}">${tareas.nombre_status}</span></td>
                             <td>
                             <div class="btn-group" role="group" aria-label="Basic example">    
                                 <a class="btn btn-outline-success" href="editar_usuario.php?id=<?php echo $row['id_usuario'] ?>">Editar<i class="fa-address-card-o"></i></a>
@@ -176,13 +185,21 @@ $(document).ready(function(){
     });
 
 
-    //$('#guardar_tarea').click(function (e) { 
-      //      alert('Enviendo informacion espere.........');
-     //   e.preventDefault();
-        
-  //  });
+ 
     
   
 });
 
     
+$('#guardar_tarea').click(function (e) { 
+    Swal.fire({
+        title:  'Espere a que se envien los datos',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading()
+        }
+    });
+    //e.preventDefault();
+    
+});

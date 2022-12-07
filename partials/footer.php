@@ -25,6 +25,7 @@
         <script src="assets/demo/chart-pie-demo.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-9/js/fontawesome.min.js" integrity="sha512-oVmijLl2dKNWcIbESKruEsNA+c8HluoPV/CBPqHAhDsMFt3IgRYdfnWEv4XR7w7gkhUQFGGJhjRe4LTPkNIT2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+        <script src="./vendor/sweetAlert2/sweetalert2.all.min.js"></script>
         <script src="./js/scripts2.js"></script>
         <script src="./js/data-table.js"></script>
     </body>
