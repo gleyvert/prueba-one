@@ -176,11 +176,11 @@ $(document).ready(function(){
     });
 
 
-    $('#guardar_tarea').click(function (e) { 
-            alert('Enviendo informacion espere.........');
-        e.preventDefault();
+    //$('#guardar_tarea').click(function (e) { 
+      //      alert('Enviendo informacion espere.........');
+     //   e.preventDefault();
         
-    });
+  //  });
     
   
 });

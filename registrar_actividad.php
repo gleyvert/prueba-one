@@ -32,7 +32,6 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                    <button>eii<i class='fas fa-edit'></i></button>
                         <h1 class="mt-4">Registrar Actividad</h1>
                        
                        <!-- <ol class="breadcrumb mb-4">
@@ -102,10 +101,10 @@
                                 <div class="card card-body bg-success p-2 bg-opacity-50" >
                                     <form action="guardar_actividad.php" method="POST">
                                         <div class="form-group mt-2">
-                                            <input type="text" name="nombre_a" class="form-control" placeholder="Ingrese el nombre de la actividad" autofocus>
+                                            <input type="text" require name="nombre_a" class="form-control" placeholder="Ingrese el nombre de la actividad" autofocus>
                                         </div>
                                         <div class="form-group mt-2">
-                                            <textarea name="descripcion_a" rows="2" class="form-control" placeholder="Ingrese la descripcion de la actividad"></textarea>
+                                            <textarea name="descripcion_a" require rows="2" class="form-control" placeholder="Ingrese la descripcion de la actividad"></textarea>
                                         </div>
                                         <div class="form-group mt-2">
                                             <select name="id_status" required class="form-select" aria-label="Default select example">
@@ -121,7 +120,7 @@
                                             </select>
                                         </div>
                                         <div class="d-grid gap-2">
-                                             <button class="btn btn-success mt-2" name="guardar_tarea" id="guardar_tarea">Guardar Tarea</button>
+                                             <button  class="btn btn-success mt-2" name="guardar_tarea" id="guardar_tarea">Guardar Tarea</button>
                                         </div>
                                     </form>
                                 </div>

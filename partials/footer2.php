@@ -26,6 +26,8 @@
 
         <script src="./vendor/bootstrap/js/dataTables.bootstrap4.min.js"></script>
         <script src="./vendor/bootstrap/js/dataTables.responsive.min.js"></script>
+
+        <script src="./vendor/sweetAlert2/sweetalert2.all.min.js"></script>
         <script src="./js/data-table.js"></script>
         <script src="./js/scripts2.js"></script>
         

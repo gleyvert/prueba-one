@@ -85,22 +85,36 @@ function editarTarea(id_tarea) {
 
   function eliminarTarea(id_tarea){
     console.log(id_tarea);
-    if (confirm("Esta seguro de que quiere eliminar la tarea?") == true) {
-        $.ajax({
-            url: "consultas/eliminar_tarea.php",
-            type: "POST",
-            data: {id_tarea:id_tarea},
-            //dataType: 'json',
-            success: function(response) {
-                let tarea = JSON.parse(response);
-                console.log(response);
-                //console.log(tarea[0]['nombre']);
-              alert(tarea);
-              tabla_tarea.ajax.reload(null, true);   
-            }
-        });
-        
-      } 
+    Swal.fire({
+        title: 'SEGURO?',
+        text: "Esta seguro de que desea eliminar la tarea!?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "consultas/eliminar_tarea.php",
+                type: "POST",
+                data: {id_tarea:id_tarea},
+                //dataType: 'json',
+                success: function(response) {
+                    let tarea = JSON.parse(response);
+                    console.log(response);
+                    //console.log(tarea[0]['nombre']);
+                  Swal.fire(
+                    'Deleted!',
+                    tarea,
+                    'success'
+                    )
+                  tabla_tarea.ajax.reload(null, true);   
+                }
+            });
+            
+        }
+      }) 
 
   }
 
@@ -149,3 +163,24 @@ function editarTarea(id_tarea) {
         
         })
      */
+
+    $('#btn1').click(function (e) { 
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+          })
+        
+    });

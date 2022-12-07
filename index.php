@@ -114,9 +114,13 @@ if (isset($_SESSION['user_id'])) {
 
             </div>
           
+            <button id="btn1" class="animate__animated animate__bounce">
+                sweet alert
+                
+            </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade animate__animated animate__bounce" id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
