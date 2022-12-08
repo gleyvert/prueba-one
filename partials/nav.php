@@ -34,6 +34,10 @@ echo $_SESSION['user_id'];
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Registros
                             </a>
+                            <a class="nav-link" href="registrar_ciudades.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Registrar Ciudades
+                            </a>
                             <a class="nav-link" href="calculadora.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Calculo

@@ -32,49 +32,7 @@ if (isset($_SESSION['user_id']) && $id_rol == 3 or $id_rol == 2) {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Registrar Usuario</h1>
-                    <!-- <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
-                            <li class="breadcrumb-item active">Registrar Actividad</li>
-                        </ol> -->
-
-                    <!-- <div class="card mb-4">
-                            <div class="card-body">
-                                Chart.js is a third party plugin that is used to generate the charts in this template. The charts below have been customized - for further customization options, please visit the official
-                                <a target="_blank" href="https://www.chartjs.org/docs/latest/">Chart.js documentation</a>
-                                .
-                            </div>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-area me-1"></i>
-                                Area Chart Example
-                            </div>
-                            <div class="card-body"><canvas id="myAreaChart" width="100%" height="30"></canvas></div>
-                            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        Bar Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
-                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-pie me-1"></i>
-                                        Pie Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
-                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                                </div>
-                            </div>
-                        </div> -->
+                    <h1 class="mt-4">Registrar Ciudades</h1>
                     <div class="row">
                         <div class="col-md-4">
                             <!-- ALERTA 1 -->
@@ -98,49 +56,8 @@ if (isset($_SESSION['user_id']) && $id_rol == 3 or $id_rol == 2) {
                                 </div>
                             <?php }  ?>
                             <div class="card card-body p-2 text-white bg-dark bg-opacity-75 mb-3">
-                                <form class=" needs-validation" novalidate action="guardar_usuario.php" method="POST">
-                                    <div class="form-group is-invalid mt-2">
-                                        <label for="nombre">Nombre</label>
-                                        <input type="text" id="nombre" required name="nombre" class="form-control is-invalid" placeholder="Ingrese el nombre de usuario" autofocus>
-                                        <div class="invalid-feedback">Example invalid custom select feedback</div>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <label for="apellido">Apellido</label>
-                                        <input type="text" id="apellido" required name="apellido" class="form-control" placeholder="Ingrese el apellido">
-                                        <div class="invalid-feedback">
-                                            Please provide a valid state.
-                                        </div>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <label for="email">Email</label>
-                                        <input type="emai" id="email" required name="email" value="" class="form-control" placeholder="Ingrese el email">
-                                        <div class="invalid-feedback">
-                                            Please provide a valid state.
-                                        </div>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <label for="edad">Edad</label>
-                                        <input type="text" id="edad" required name="edad" class="form-control" placeholder="Ingrese la edad">
-                                        <div class="invalid-feedback">
-                                            Please provide a valid state.
-                                        </div>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <label for="rol">Rol</label>
-                                        <select name="id_rol" id="rol" required class="form-select" aria-label="Default select example">
-                                            <option value="">Seleccione el rol</option>
-                                            <?php
-                                            $records = $conn->prepare('SELECT * FROM roles');
-                                            $records->execute();
-                                            $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
-
-                                            foreach ($resultado as $row) { ?>
-                                                <option value="<?php echo $row['id_rol'] ?>"><?php echo $row['nombre_rol'] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                        <div class="invalid-feedback">Example invalid custom select feedback</div>
-                                    </div>
-                                    <div class="form-group mt-2">
+                                <form class="needs-validation" novalidate action="guardar_ciudad.php" method="POST">
+                                    <div class="form-group bg-primary bg-opacity-25 mt-2 border border-primary rounded">
                                         <label for="id_ciudad">Ciudad</label>
                                         <select name="id_ciudad" id="id_ciudad" required class="form-select" aria-label="Default select example">
                                             <option value="">Seleccione la ciudad</option>
@@ -154,8 +71,13 @@ if (isset($_SESSION['user_id']) && $id_rol == 3 or $id_rol == 2) {
                                             <?php } ?>
                                         </select>
                                         <div class="invalid-feedback">Example invalid custom select feedback</div>
+                                        <div class="mt-3">
+                                            <div class="">
+                                                <button type="button" class="btn btn-outline-success btn-block" id="guardar_usuario" require name="" data-toggle="modal" data-target="#ModalAgregarCiudad">agregar ciudad</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group mt-2">
+                                    <div class="form-group bg-success bg-opacity-25 mt-2 border border-success rounded">
                                         <label for="id_municipio">Municipio</label>
                                         <select name="id_municipio" id="id_municipio" required class="form-select" aria-label="Default select example">
                                             <option value="">Seleccione el municipio</option>
@@ -163,16 +85,11 @@ if (isset($_SESSION['user_id']) && $id_rol == 3 or $id_rol == 2) {
 
                                         </select>
                                         <div class="invalid-feedback">Example invalid custom select feedback</div>
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Constraseña</label>
-                                        <input type="password" id="password" required name="password" class="form-control" placeholder="Ingrese la contraseña">
-                                        <div class="invalid-feedback">Example invalid custom select feedback</div>
-
-                                    </div>
-                                    <div class="d-grid gap-2">
-                                        <button class="btn btn-outline-primary" id="guardar_usuario" require name="guardar_Usuario">Guardar Usuario</button>
+                                        <div class="mt-3">
+                                            <div class="">
+                                                <button type="button" class="btn btn-outline-dark btn-block" id="guardar_usuario" require name="" data-toggle="modal" data-target="#ModalAgregarMunicipio">agregar Municipio</button>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </form>
@@ -182,13 +99,10 @@ if (isset($_SESSION['user_id']) && $id_rol == 3 or $id_rol == 2) {
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Email</th>
-                                        <th>Edad</th>
-                                        <th>Ciudad</th>
-                                        <th>Rol del Usuario</th>
-                                        <th>Acciones</th>
+                                        <th>id_ciudad</th>
+                                        <th>Ciudades</th>
+                                        <th>municipios</th>
+
                                     </tr>
                                 </thead>
                                 <tbody id="bodyId">
@@ -225,6 +139,102 @@ if (isset($_SESSION['user_id']) && $id_rol == 3 or $id_rol == 2) {
                     </div>
                 </div>
             </main>
+             <!-- Modal Agregar ciudad-->
+             <div class="modal fade animate__animated animate__bounce" id="ModalAgregarCiudad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="">
+                                <form class="form">
+                                    <div class="form-group">
+                                        <input type="hidden" id="id_tarea">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Nombre de tarea</label>
+                                        <input type="text" id="nombre_tarea" value="" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Descripcion de tarea</label>
+                                        <input type="text" id="descripcion_tarea" value="" class="form-control">
+                                    </div>
+                                    <div class="form-group mt-2">
+                                            <select name="id_status" id="option" required class="form-select" aria-label="Default select example">
+                                            <option  value="">Seleccione el status</option>
+                                            <?php
+                                                $records = $conn->prepare('SELECT * FROM status_tareas');
+                                                $records->execute();
+                                                $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
+
+                                                foreach($resultado as $row){ ?>
+                                                <option  value="<?php echo $row['id_status'] ?>"><?php echo $row['nombre'] ?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" onclick="guardarTarea()">Guardar tarea</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Agregar Municipio-->
+            <div class="modal fade animate__animated animate__bounce" id="ModalAgregarMunicipio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="">
+                                <form class="form">
+                                    <div class="form-group">
+                                        <input type="hidden" id="id_tarea">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Nombre de tarea</label>
+                                        <input type="text" id="nombre_tarea" value="" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Descripcion de tarea</label>
+                                        <input type="text" id="descripcion_tarea" value="" class="form-control">
+                                    </div>
+                                    <div class="form-group mt-2">
+                                            <select name="id_status" id="option" required class="form-select" aria-label="Default select example">
+                                            <option  value="">Seleccione el status</option>
+                                            <?php
+                                                $records = $conn->prepare('SELECT * FROM status_tareas');
+                                                $records->execute();
+                                                $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
+
+                                                foreach($resultado as $row){ ?>
+                                                <option  value="<?php echo $row['id_status'] ?>"><?php echo $row['nombre'] ?></option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" onclick="guardarTarea()">Guardar tarea</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
