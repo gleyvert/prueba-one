@@ -19,6 +19,7 @@ if (isset($_SESSION['user_id']) && $id_rol == 3 or $id_rol == 2) {
     <meta name="author" content="" />
     <title>Charts - SB Admin</title>
     <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <link href="./css/styles2.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -95,56 +96,36 @@ if (isset($_SESSION['user_id']) && $id_rol == 3 or $id_rol == 2) {
                                 </form>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <table class="table table-bordered">
+
+                        <div class="col-md-12">
+                            <table id="tabla-ciudades" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>id_ciudad</th>
-                                        <th>Ciudades</th>
-                                        <th>municipios</th>
-
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Fecha de Creacion</th>
+                                        <th>Estatus</th>
+                                        <th>Editar</th>
+                                        <th>Eliminar</th>
                                     </tr>
                                 </thead>
-                                <tbody id="bodyId">
-
+                                <tbody id="tabla-tr">
+                                    
                                 </tbody>
-                                <tbody id="bodyId2">
-                                    <?php
-                                    $usuario = $_SESSION['user_id'];
-                                    $records = $conn->prepare('SELECT id_usuario, usuarios.nombre, ciudades.nombre as nombre_ciudad, apellido, email, edad, usuarios.id_ciudad, usuarios.id_rol, nombre_rol FROM usuarios LEFT JOIN ciudades ON usuarios.id_ciudad=ciudades.id_ciudad LEFT JOIN roles ON usuarios.id_rol=roles.id_rol');
-                                    //$records->bindParam(':usuario', $usuario);
-                                    $records->execute();
-                                    $results = $records->fetchAll(PDO::FETCH_ASSOC);
-
-                                    foreach ($results as $row) { ?>
-                                        <tr>
-                                            <td><?php echo $row['nombre'] ?></td>
-                                            <td><?php echo $row['apellido'] ?></td>
-                                            <td><?php echo $row['email'] ?></td>
-                                            <td><?php echo $row['edad'] ?></td>
-                                            <td><?php echo $row['nombre_ciudad'] ?></td>
-                                            <td><?php echo $row['nombre_rol'] ?></td>
-                                            <td>
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a class="btn btn-outline-success" href="editar_usuario.php?id=<?php echo $row['id_usuario'] ?>">Editar<i class="fa-address-card-o"></i></a>
-                                                    <a class="btn btn-outline-danger" href="eliminar_usuario.php?id=<?php echo $row['id_usuario'] ?>">Eliminar</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                    <?php  } ?>
-                                </tbody>
+                              
                             </table>
+
                         </div>
                     </div>
                 </div>
             </main>
-             <!-- Modal Agregar ciudad-->
-             <div class="modal fade animate__animated animate__bounce" id="ModalAgregarCiudad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- Modal Agregar ciudad-->
+            <div class="modal fade" id="ModalAgregarCiudad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Agregar ciudad</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -152,47 +133,34 @@ if (isset($_SESSION['user_id']) && $id_rol == 3 or $id_rol == 2) {
 
                         <div class="modal-body">
                             <div class="">
-                                <form class="form">
+                                <form id="form-ciudades" class="form">
                                     <div class="form-group">
                                         <input type="hidden" id="id_tarea">
                                     </div>
                                     <div class="form-group">
-                                        <label for="">Nombre de tarea</label>
-                                        <input type="text" id="nombre_tarea" value="" class="form-control">
+                                        <label for="nombre_ciudad">Ciudad</label>
+                                        <input type="text" id="nombre_ciudad" value="" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label for="">Descripcion de tarea</label>
-                                        <input type="text" id="descripcion_tarea" value="" class="form-control">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                            <select name="id_status" id="option" required class="form-select" aria-label="Default select example">
-                                            <option  value="">Seleccione el status</option>
-                                            <?php
-                                                $records = $conn->prepare('SELECT * FROM status_tareas');
-                                                $records->execute();
-                                                $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
 
-                                                foreach($resultado as $row){ ?>
-                                                <option  value="<?php echo $row['id_status'] ?>"><?php echo $row['nombre'] ?></option>
-                                                <?php }?>
-                                            </select>
-                                        </div>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary" onclick="guardarTarea()">Guardar tarea</button>
+                            <button type="button" id="button" class="btn btn-primary">Guardar Ciudad</button>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Modal Agregar Municipio-->
-            <div class="modal fade animate__animated animate__bounce" id="ModalAgregarMunicipio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="ModalAgregarMunicipio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Agregar Municipio</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -204,33 +172,32 @@ if (isset($_SESSION['user_id']) && $id_rol == 3 or $id_rol == 2) {
                                     <div class="form-group">
                                         <input type="hidden" id="id_tarea">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="">Nombre de tarea</label>
-                                        <input type="text" id="nombre_tarea" value="" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Descripcion de tarea</label>
-                                        <input type="text" id="descripcion_tarea" value="" class="form-control">
-                                    </div>
-                                    <div class="form-group mt-2">
-                                            <select name="id_status" id="option" required class="form-select" aria-label="Default select example">
-                                            <option  value="">Seleccione el status</option>
+                                    <div id="divSelect" class="form-group mt-2">
+                                        <label for="id_ciudad2">Ciudad</label>
+                                        <select name="id_ciudad" id="id_ciudad2" required class="form-select" aria-label="Default select example">
+                                            <option value="">Seleccione la ciudad</option>
                                             <?php
-                                                $records = $conn->prepare('SELECT * FROM status_tareas');
-                                                $records->execute();
-                                                $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
+                                            $records = $conn->prepare('SELECT * FROM ciudades');
+                                            $records->execute();
+                                            $resultado = $records->fetchAll(PDO::FETCH_ASSOC);
 
-                                                foreach($resultado as $row){ ?>
-                                                <option  value="<?php echo $row['id_status'] ?>"><?php echo $row['nombre'] ?></option>
-                                                <?php }?>
-                                            </select>
-                                        </div>
+                                            foreach ($resultado as $row) { ?>
+                                                <option value="<?php echo $row['id_ciudad'] ?>"><?php echo $row['nombre'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        <div class="invalid-feedback">Ingrese la ciudad primero para agregar municipio</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Municipio</label>
+                                        <input type="text" id="nombre_municipio" value="" class="form-control">
+                                        <div class="invalid-feedback">Ingrese municipio</div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary" onclick="guardarTarea()">Guardar tarea</button>
+                            <button type="button" id="button2" class="btn btn-primary">Guardar Municipio</button>
                         </div>
                     </div>
                 </div>
@@ -258,8 +225,10 @@ if (isset($_SESSION['user_id']) && $id_rol == 3 or $id_rol == 2) {
     <script src="assets/demo/chart-area-demo.js"></script>
     <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="assets/demo/chart-pie-demo.js"></script>
+    <script src="./vendor/sweetAlert2/sweetalert2.all.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/validacion.js"></script>
+    <script src="js/ciudades.js"></script>
 </body>
 
 </html>
