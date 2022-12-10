@@ -63,11 +63,32 @@ $('#button2').on('click', function () {
                 $("#ModalAgregarMunicipio").modal("hide");
 
                 if(response){
-                 Swal.fire(
-                    'Guardado!',
-                    response,
-                    'success'
-                  )
+              //Swal TIMER
+                  let timerInterval;
+                      Swal.fire({
+                        icon:'success',
+                        title: response,
+                        position:'top-end',
+                        html: 'Se cerrara en <b></b> Milisegundors.',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                          Swal.showLoading()
+                          const b = Swal.getHtmlContainer().querySelector('b')
+                          timerInterval = setInterval(() => {
+                            b.textContent = Swal.getTimerLeft()
+                          }, 100)
+                        },
+                        willClose: () => {
+                          clearInterval(timerInterval)
+                        }
+                      }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                          console.log('I was closed by the timer')
+                        }
+                      }) //end SWAL TIMER
+
                   $('#nombre_municipio').val('');
                   $('#id_ciudad2').val('');
                   $('#divSelect').attr('class', 'form-group mt-2');
@@ -76,8 +97,10 @@ $('#button2').on('click', function () {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error...',
+                        position: 'top-end' ,
                         text: 'La ciudad ya existe',
                       })
+                      
                       $('#nombre_municipio').attr('class', 'form-control is-invalid');
                 }
                
